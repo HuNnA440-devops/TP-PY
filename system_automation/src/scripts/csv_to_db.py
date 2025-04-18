@@ -2,11 +2,11 @@ import sqlite3
 import csv
 
 def csv_to_db():
-# Connexion à la base SQLite
+
     conn = sqlite3.connect("system_automation/src/db/users.db")
     c = conn.cursor()
 
-# Création de la table
+
     c.execute("DROP TABLE IF EXISTS users")
     c.execute("""
 CREATE TABLE users (
@@ -18,7 +18,6 @@ CREATE TABLE users (
 )
 """)
 
-# Lecture du fichier CSV et insertion dans la base
     with open("system_automation/src/data/users.csv", newline='') as f:
         reader = csv.DictReader(f)
         for row in reader:
@@ -33,6 +32,6 @@ CREATE TABLE users (
             row['last_login'].strip()
         ))
 
-# Commit et fermeture de la connexion
+
     conn.commit()
     conn.close()
